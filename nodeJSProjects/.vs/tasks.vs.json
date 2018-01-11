@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-index",
+      "appliesTo": "index.ejs",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-index",
+      "appliesTo": "views/index.ejs",
+      "type": "launch"
+    }
+  ]
+}

@@ -1,22 +1,20 @@
-var http = require('http');
-var fs = require('fs');
+var express = require('express');
+var bodyParser = require('body-parser');
 
-http.createServer(function (req, res) {
-    if (req.url === '/Tester') {
-        fs.createReadStream(__dirname + '/index.html').pipe(res);
-    }
-    else if (req.url === '/') {
-        res.writeHead(200, { 'Content-Type': 'application/JSON' });
+var app = express();
 
-        var obj = {
-            firstname: 'Anthony',
-            lastname: 'Larson'
-        };
+var port = process.env.port || 3000;
 
-        res.end(JSON.stringify(obj));
-    }
-    else {
-        res.writeHead(404);
-        res.end();
-    }
-}).listen(1337, '127.0.0.1');
+app.use(express.static(__dirname + '/public'));
+
+app.set('view engine', 'ejs');
+
+app.get('/', function (req, res) {
+    res.render('index');
+});
+
+app.get('/person/:id', function (req, res) {
+    res.render('person', { ID: req.params.id });
+});
+
+app.listen(port);
